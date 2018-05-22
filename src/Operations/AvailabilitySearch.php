@@ -10,8 +10,11 @@ use JMS\Serializer\Annotation\XmlRoot;
 use SalmaAbdelhady\RoomsXML\Model\Guests;
 use SalmaAbdelhady\RoomsXML\Model\Person;
 use SalmaAbdelhady\RoomsXML\Model\Room;
+use SalmaAbdelhady\RoomsXML\Model\Hotel;
 use SalmaAbdelhady\RoomsXML\Results\AvailabilitySearchResult;
 use SalmaAbdelhady\RoomsXML\RoomsXMLRequest;
+use Doctrine\Common\Collections\ArrayCollection;
+use SalmaAbdelhady\RoomsXML\Model\Request\Hotels;
 
 /**
  * Class AvailabilitySearch
@@ -44,6 +47,13 @@ class AvailabilitySearch extends RoomsXMLRequest
      * @Type(name="integer")
      */
     private $HotelId;
+
+    /**
+     * @var Hotels
+     * @Type("SalmaAbdelhady\RoomsXML\Model\Request\Hotels")
+     * @SerializedName("Hotels")
+     */
+    private $Hotels;
 
     /**
      * @XmlElement(cdata=false)
@@ -80,6 +90,12 @@ class AvailabilitySearch extends RoomsXMLRequest
      */
     private $MaxSearchTime;
 
+
+    /**
+     * AvailabilitySearch constructor.
+     */
+
+
     /**
      * @return array
      * @throws \SalmaAbdelhady\RoomsXML\RoomsXMLException
@@ -113,6 +129,23 @@ class AvailabilitySearch extends RoomsXMLRequest
 
        return new AvailabilitySearchResult($response);
     }
+
+    /**
+     * @return mixed
+     */
+    public function getHotels()
+    {
+        return $this->Hotels;
+    }
+
+    /**
+     * @param mixed $Hotels
+     */
+    public function setHotels($Hotels)
+    {
+        $this->Hotels = $Hotels;
+    }
+
 
     /**
      * @return mixed

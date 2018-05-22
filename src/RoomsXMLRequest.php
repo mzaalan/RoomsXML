@@ -44,7 +44,7 @@ class RoomsXMLRequest
     public function __construct(RoomsXMLAuthentication $config)
     {
         $this->authority = $config;
-        $this->apiURL    = getenv('API_URL');
+        $this->apiURL    = "http://www.roomsxmldemo.com/RXLStagingServices/ASMX/XmlService.asmx";//getenv('API_URL');
     }
 
 
@@ -55,8 +55,8 @@ class RoomsXMLRequest
     public function sendRequest(): string
     {
         $serializer = SerializerBuilder::create()->build();
-
         $data     = $serializer->serialize($this, 'xml');
+        //dd($data);
         $cURL     = $this->initCurl($data);
         $browser  = new Browser($cURL);
         $response = $browser->post($this->apiURL);
